@@ -2,7 +2,7 @@ src=$1
 tgt=$2
 
 for num in 20 40 60 80 100; do
-  python preprocess.py --source-lang de --target-lang en \
+  python preprocess.py --source-lang $src --target-lang $tgt \
     --trainpref data/iwslt14.tokenized.$src-"$tgt"/subsample_$num/train --validpref data/iwslt14.tokenized.$src-"$tgt"/valid --testpref data/iwslt14.tokenized.$src-"$tgt"/test \
     --destdir data-bin/iwslt14.tokenized.$src-$tgt \
     --workers 20 \
