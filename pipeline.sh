@@ -6,7 +6,7 @@ for dir in iwslt14.tokenized.es-fr iwslt14.tokenized.it-pt-br iwslt14.tokenized.
   tgt=${dir:21:2}
 
   mkdir bleu/$src-$tgt
-  for num in 20 40 60 80 100; do
+  for num in 40 50 60 70 80 90 100; do
     echo "================================================== Preprocessing: ${src}-${tgt} ${num}================================================== "
 
     python preprocess.py --source-lang $src \
