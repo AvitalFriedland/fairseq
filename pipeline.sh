@@ -1,8 +1,10 @@
 epochs=$1
 
 for dir in iwslt14.tokenized.es-fr iwslt14.tokenized.it-pt-br iwslt14.tokenized.es-pt-br iwslt14.tokenized.ro-es iwslt14.tokenized.fr-pt-br iwslt14.tokenized.ro-fr iwslt14.tokenized.it-es iwslt14.tokenized.ro-it iwslt14.tokenized.it-fr iwslt14.tokenized.ro-pt-br; do
+
   src=${dir:18:2}
   tgt=${dir:21:2}
+
   mkdir bleu/$src-$tgt
   for num in 20 40 60 80 100; do
     echo "================================================== Preprocessing: ${src}-${tgt} ${num}================================================== "
