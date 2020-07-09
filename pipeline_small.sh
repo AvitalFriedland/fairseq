@@ -3,7 +3,7 @@ tgt=$2
 epochs=$3
 
 mkdir bleu/bleu-$src-$tgt
-  for num in 20 40 60 80 100; do
+  for num in 50 60 70 80 90 100; do
     echo "================================================== Preprocessing: ${src}-${tgt} ${num}================================================== "
 
     python preprocess.py --source-lang $src \
