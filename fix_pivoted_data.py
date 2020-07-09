@@ -26,7 +26,7 @@ def main():
     print(f'max difference between files is {max_diff}')
     with open(f'{src_path}/train.tags.en-{src}.en') as src_en:
         en_lines_src = src_en.readlines()
-        with open(f'{tgt_file}/train.tags.en-{tgt}.en') as tgt_en:
+        with open(f'{tgt_path}/train.tags.en-{tgt}.en') as tgt_en:
             en_lines_tgt = tgt_en.readlines()
             for src_ind, line in enumerate(en_lines_src):
                 tgt_ind = find_line_in_tgt(en_lines_tgt, line, index=src_ind, max_diff=max_diff)
