@@ -21,13 +21,7 @@ from fairseq.binarizer import Binarizer
 
 
 logging.basicConfig(
-    format='%(asctime)s | %(levelname)s | %(n# spanish = find_talk_ids_check_fixed('spanish')
-# italian = find_talk_ids_check_fixed('italian')
-#
-# print(set(spanish).difference(set(italian)))
-# print(set(italian).difference(set(spanish)))
-#
-ame)s | %(message)s',
+    format='%(asctime)s | %(levelname)s | %(name)s | %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     level=logging.INFO,
     stream=sys.stdout,
