@@ -9,10 +9,10 @@ def main():
         '--tgt', '-t', type=str, required=True
     )
     parser.add_argument(
-        '--src_path', '-p', type=str, required=False, default='.'
+        '--src_path', '-sp', type=str, required=False, default='.'
     )
     parser.add_argument(
-        '--tgt_path', '-p', type=str, required=False, default='.'
+        '--tgt_path', '-tp', type=str, required=False, default='.'
     )
     parser.add_argument('--out', '-o', type=str, required=True)
     args = parser.parse_args()
