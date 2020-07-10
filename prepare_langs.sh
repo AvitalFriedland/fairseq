@@ -14,20 +14,26 @@ CLEAN=$SCRIPTS/training/clean-corpus-n.perl
 BPEROOT=subword-nmt/subword_nmt
 BPE_TOKENS=10000
 
+
+
 src=$1
 tgt=$2
+src_path=$3
+tgt_path=$4
 lang=$src-$tgt
 prep=iwslt14.tokenized.$src-$tgt
 tmp=$prep/tmp
 #orig=orig
+
+python fixed_pivoted_data.py -s $src -t $tgt -sp $src_path  -tp $tgt_path  -o fixed_data/all/aligned
 
 mkdir -p  $tmp $prep
 
 
 echo "pre-processing train data..."
 for l in $src $tgt; do
-    f=fixed.$l
-    tok=fixed.tok.$l
+    f=aligned.$l
+    tok=aligned.tok.$l
 
     cat $f | \
     grep -v '<url>' | \
@@ -40,9 +46,9 @@ for l in $src $tgt; do
     perl $TOKENIZER -threads 8 -l $l > $tmp/$tok
     echo ""
 done
-perl $CLEAN -ratio 1.5 $tmp/fixed.tok $src $tgt $tmp/fixed.clean 1 175
+perl $CLEAN -ratio 1.5 $tmp/aligned.tok $src $tgt $tmp/aligned.clean 1 175
 for l in $src $tgt; do
-    perl $LC < $tmp/fixed.clean.$l > $tmp/fixed.$l
+    perl $LC < $tmp/aligned.clean.$l > $tmp/aligned.$l
 done
 
 
@@ -65,8 +71,8 @@ done
 
 echo "creating train, valid, test..."
 for l in $src $tgt; do
-    awk '{if (NR%23 == 0)  print $0; }' $tmp/fixed.$l > $tmp/valid.$l
-    awk '{if (NR%23 != 0)  print $0; }' $tmp/fixed.$l > $tmp/train.$l
+    awk '{if (NR%23 == 0)  print $0; }' $tmp/aligned.$l > $tmp/valid.$l
+    awk '{if (NR%23 != 0)  print $0; }' $tmp/aligned.$l > $tmp/train.$l
 
     # cat $tmp/IWSLT17.TED.dev2010.$lang.$l \
     #     $tmp/IWSLT17.TED.tst2010.$lang.$l \
