@@ -108,7 +108,7 @@ def align_files(src_file_en_path, src_file_path, tgt_file_en_path, tgt_file_path
         en_lines_src = src_en.readlines()
         with open(tgt_file_en_path) as tgt_en:
             en_lines_tgt = tgt_en.readlines()
-            for src_ind, line in enumerate(en_lines_src[:10000]):
+            for src_ind, line in enumerate(en_lines_src):
                 tgt_ind = find_line_in_tgt(en_lines_tgt, line, index=src_ind, max_diff=max_diff)
                 if src_ind%10000==0:
                     print(f'found line src {src_ind} in tgt {tgt_ind}')
