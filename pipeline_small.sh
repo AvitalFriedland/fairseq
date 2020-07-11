@@ -2,7 +2,7 @@ src=$1
 tgt=$2
 epochs=$3
 
-mkdir bleu/bleu-$src-$tgt
+mkdir results/bleu/bleu-$src-$tgt
   for num in 50 60 70 80 90 100; do
     echo "================================================== Preprocessing: ${src}-${tgt} ${num}================================================== "
 
@@ -39,7 +39,8 @@ mkdir bleu/bleu-$src-$tgt
       --encoder-embed-dim 256 --decoder-embed-dim 256 \
       --encoder-layers 4 --decoder-layers 4 \
       --tensorboard-logdir log \
-      --log-format json | tee train_$src-$tgt-$num.log | grep valid_bleu | tee bleu/bleu-$src-$tgt/bleu_$src-$tgt-$num.log
+      --log-format json | tee results/train_$src-$tgt-$num.log
+       cat tee results/train_$src-$tgt-$num.log | grep valid_bleu | tee results/bleu/bleu-$src-$tgt/bleu_$src-$tgt-$num.log
 
     echo "================================================== Training: ${src}-${tgt} ${num} Done================================================== "
 

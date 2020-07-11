@@ -38,19 +38,21 @@ def main():
     src, tgt, src_path, tgt_path, mode, output= args.src, args.tgt, \
                                                 args.src_path, args.tgt_path, args.mode, args.out
     if mode=='test':
-        test_file_src_en, test_file_src, test_file_tgt_en, test_file_tgt = concat_test_files(src,tgt,src_path,tgt_path)
-        align_files(test_file_src_en, test_file_src, test_file_tgt_en, test_file_tgt, output)
+        test_file_src_en, test_file_src, test_file_tgt_en, test_file_tgt = concat_test_files(src, tgt, src_path,
+                                                                                             tgt_path, output)
+        align_files(test_file_src_en, test_file_src, test_file_tgt_en, test_file_tgt, output, src, tgt)
 
     elif mode=='train':
         train_file_src_en, train_file_src, train_file_tgt_en, train_file_tgt = get_train_files_paths(src,tgt,src_path,tgt_path)
-        align_files(train_file_src_en, train_file_src, train_file_tgt_en, train_file_tgt, output)
+        align_files(train_file_src_en, train_file_src, train_file_tgt_en, train_file_tgt, output, src, tgt)
     else:
         print('Unknown mode, use train or test')
 
-def concat_test_files(src,tgt,src_path,tgt_path):
+def concat_test_files(src, tgt, src_path, tgt_path, out_path):
     '''Concats all the test files into one test file per language
     (one per source, source_english, target, target_english).
-    Returns filenames of test files created.'''
+    Returns filenames of test files created.
+    :param out_path: '''
     file_suffix = '.xml'
     test_data_src_en = []
     test_data_src = []
@@ -93,9 +95,11 @@ def get_train_files_paths(src,tgt,src_path,tgt_path):
     train_file_tgt= f'{tgt_path}/{file_prefix}{tgt}.{tgt}'
     return train_file_src_en, train_file_src, train_file_tgt_en, train_file_tgt
 
-def align_files(src_file_en_path, src_file_path, tgt_file_en_path, tgt_file_path, output):
+def align_files(src_file_en_path, src_file_path, tgt_file_en_path, tgt_file_path, output, src, tgt):
     '''Creates proper alignment between src and tgt language through the english data of each.
-    Writes new correct files with 'output' '''
+    Writes new correct files with 'output'
+    :param src:
+    :param tgt: '''
     src_file_handler = open(src_file_path)
     src_data = src_file_handler.readlines()
     tgt_file_handler = open(tgt_file_path)
@@ -114,7 +118,7 @@ def align_files(src_file_en_path, src_file_path, tgt_file_en_path, tgt_file_path
                     print(f'found line src {src_ind} in tgt {tgt_ind}')
                 mapping_src_to_tgt.append((src_ind, tgt_ind))
 
-    src_output_path, tgt_output_path = f'{src_file_path}_{output}', f'{tgt_file_path}_{output}'
+    src_output_path, tgt_output_path = f'{output}.{src}', f'{output}.{tgt}'
     with open(src_output_path, 'a') as src_output:
         with open(tgt_output_path, 'a') as tgt_output:
             for src_index, tgt_ind in mapping_src_to_tgt:
