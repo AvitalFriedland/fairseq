@@ -7,7 +7,7 @@ device=$2
 echo "=== Creating virtualenv ===
 
 "
-cd /vol/scratch/$username
+#cd /vol/scratch/$username
 virtualenv --system-site-packages -p python3.7 ./nlp
 source ./nlp/bin/activate.csh
 
@@ -42,7 +42,7 @@ echo "=== Installing fairseq ===
 
 "
 
-git clone https://github.com/AvitalFriedland/fairseq.git
+#git clone https://github.com/AvitalFriedland/fairseq.git
 cd fairseq
 pip install --editable .
 
