@@ -11,7 +11,7 @@ mkdir results/bleu/bleu-$src-$tgt
       --trainpref data/iwslt14.tokenized.$src-"$tgt"/subsample_$num/train --validpref data/iwslt14.tokenized.$src-"$tgt"/valid --testpref data/iwslt14.tokenized.$src-"$tgt"/test \
       --destdir data-bin/iwslt14.tokenized.$src-$tgt-$num \
       --workers 20 \
-      --tensorboard-logdir log
+      --joined-dictionary
     echo "================================================== Preprocessing: ${src}-${tgt} ${num} Done==================================================
 
 
