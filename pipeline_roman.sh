@@ -55,6 +55,7 @@ mkdir results/bleu/bleu-$src-$tgt
     --fp16 \
     -s fr \
     -t ro \
+    --log-format json | tee results/train_$src-$tgt-$num.log
     cat tee results/test_bleu_$src-$tgt-$num.log | grep BLEU4 | tee results/bleu/test_bleu_$src-$tgt-$num.log
     echo "================================================== Evaluating: ${src}-${tgt} ${num} Done================================================== "
 
