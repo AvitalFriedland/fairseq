@@ -48,6 +48,15 @@ mkdir results/bleu/bleu-$src-$tgt
        cat tee results/train_$src-$tgt-$num.log | grep valid_bleu | tee results/bleu/bleu-$src-$tgt/bleu_$src-$tgt-$num.log
 
     echo "================================================== Training: ${src}-${tgt} ${num} Done================================================== "
+    echo "================================================== Evaluating: ${src}-${tgt} ${num} ================================================== "
+    fairseq-generate data-bin/iwslt14.tokenized.$src-$tgt-$num --path baseline/$src-$tgt-$num/checkpoint_best.pt \
+    --batch-size 128 \
+    --beam 5 --remove-bpe \
+    --fp16 \
+    -s fr \
+    -t ro \
+    cat tee results/test_bleu_$src-$tgt-$num.log | grep BLEU4 | tee results/bleu/test_bleu_$src-$tgt-$num.log
+    echo "================================================== Evaluating: ${src}-${tgt} ${num} Done================================================== "
 
 
 done
