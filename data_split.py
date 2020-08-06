@@ -2,7 +2,7 @@ import sys
 import os
 
 def split_file(top_path, lang):
-    sub_files = [50,60,70,80,90,100]
+    sub_files = [20,30,40]
     with open(f'{top_path}/train.{lang}') as f:
         lines = f.readlines()
         num_lines = len(lines)
@@ -29,17 +29,20 @@ def fix_pt(path):
     return path[:-3]
 
 if __name__ == "__main__":
+    import os
     for _, arg in enumerate(sys.argv[1:]):
         path = str(arg)
         # path = fix_pt(path)
-        try:
-            src, tgt = path.split(".")[-1].split("-")
-        except:
-            src, tgt1, tgt2 = path.split(".")[-1].split("-")
-            tgt = tgt1+'-'+tgt2
-        print(f'src language {src} tgt language {tgt}')
-        split_file(path, src)
-        split_file(path, tgt)
+        for file in os.listdir(path):
+            print(file)
+            try:
+                src, tgt = file.split(".")[-1].split("-")
+            except:
+                src, tgt1, tgt2 = file.split(".")[-1].split("-")
+                tgt = tgt1+'-'+tgt2
+            print(f'src language {src} tgt language {tgt}')
+            split_file(path+file, src)
+            split_file(path+file, tgt)
 
 
 
