@@ -11,7 +11,8 @@ mkdir results/bleu/bleu-$src-$tgt
     --fp16 \
     -s $src \
     -t $tgt \
-    --log-format json | tee results/test_$src-$tgt-$num.log
-    cat tee results/test_$src-$tgt-$num.log | grep BLEU4 | tee results/bleu/test_bleu_$src-$tgt-$num.log
+    --quiet \
+    --results-path results/bleu/test_bleu-$src-$tgt-$num
     echo "================================================== Evaluating: ${src}-${tgt} ${num} Done================================================== "
 done
+
