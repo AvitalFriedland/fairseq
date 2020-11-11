@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 
 echo 'Cloning Moses github repository (for tokenization scripts)...'
